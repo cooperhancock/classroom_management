@@ -1,5 +1,5 @@
 module.exports = {
-    "ignorePatterns": [".eslintrc.js"],
+    "ignorePatterns": [".eslintrc.js", "build/*"],
     "env": {
         "es2021": true,
         "node": true

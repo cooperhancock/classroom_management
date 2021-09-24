@@ -25,7 +25,7 @@ app.use(async (ctx) => {
 });
 
 const main = () => {
-    const PORT = 3000;
+    const PORT = parseInt(process.env.PORT ?? "3001");
     console.log(`Listening on port ${PORT}`);
     app.listen(PORT);
 };
