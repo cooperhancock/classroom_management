@@ -1,0 +1,30 @@
+version: "3"
+services:
+  cm_api:
+    build: ./backend
+    depends_on:
+      - cm_postgres
+    restart: always
+    ports:
+      - "3001:3001"
+    # TODO: environment variables for db connection
+  cm_frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:8080"
+  cm_postgres:
+    image: postgres:13.1
+    restart: always
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=timetracker
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+volumes:
+  database-data:
