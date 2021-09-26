@@ -1,0 +1,10 @@
+{
+    "name": "Node.js",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/workspace",
+    "extensions": [
+        "dbaeumer.vscode-eslint",
+        "Prisma.prisma"
+    ]
+}
