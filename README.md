@@ -25,7 +25,18 @@ $ cd frontend
 $ npm ci
 $ cd ../backend
 $ npm ci
+$ npx prisma generate
 ```
+
+### What is `prisma generate`?
+Prisma is an ORM that makes it easier to communicate with the database. Its main
+feature is complete type safety (i.e the type definitions are very precise and 
+correct for the kind of data that is stored in your database). However, to 
+achieve this type safety, it must use code generation techniques (i.e it cannot
+just use TypeScript generic types). The command `prisma generate` regenerates
+the database client library. You will need to run it any time changes are made
+to the data model (which fortunately should not be very often.)
+
 
 ## Running the frontend and backend
 In VSCode, open 2 terminals

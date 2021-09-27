@@ -1,5 +1,11 @@
 import Koa from "koa";
+import json from "koa-json";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 const app = new Koa();
+
+app.use(json({ pretty: false }));
 
 // logger
 
@@ -21,7 +27,7 @@ app.use(async (ctx, next) => {
 // response
 
 app.use(async (ctx) => {
-    ctx.body = "Hello World";
+    ctx.body = await prisma.building.findMany();
 });
 
 const main = () => {
@@ -30,4 +36,8 @@ const main = () => {
     app.listen(PORT);
 };
 
-main();
+try {
+    main();
+} finally {
+    prisma.$disconnect();
+}
