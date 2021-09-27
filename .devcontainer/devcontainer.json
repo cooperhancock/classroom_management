@@ -5,6 +5,7 @@
     "workspaceFolder": "/workspace",
     "extensions": [
         "dbaeumer.vscode-eslint",
-        "Prisma.prisma"
+        "Prisma.prisma",
+        "esbenp.prettier-vscode",
     ]
 }
