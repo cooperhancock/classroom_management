@@ -1,27 +1,43 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { AppBar, Button, Toolbar, Typography, Container } from "@mui/material";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function App() {
-    console.log("foo");
+import React, { FC } from "react";
+
+const App: FC = () => {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <>
+            <Container>
+                <Router>
+                    <AppBar position="fixed">
+                        <Toolbar>
+                            <Typography variant="h6">
+                                Classroom Management
+                            </Typography>
+                            <Button component={Link} to="/" color="inherit">
+                                Home
+                            </Button>
+                            <Button
+                                component={Link}
+                                to="/example_route"
+                                color="inherit"
+                            >
+                                Example Route
+                            </Button>
+                        </Toolbar>
+                    </AppBar>
+                    <Toolbar />
+                    <Switch>
+                        <Route exact path="/">
+                            home page
+                        </Route>
+                        <Route path="/example_route">
+                            example route (not the home page)
+                        </Route>
+                    </Switch>
+                </Router>
+            </Container>
+        </>
     );
-}
+};
 
 export default App;
