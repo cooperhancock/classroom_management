@@ -40,8 +40,8 @@ model Reservation {
   id                 String   @id @default(uuid())
   room               Room     @relation(fields: [roomId], references: [id])
   roomId             String
-  startTimestamp     DateTime
-  endTimestamp       DateTime
+  startTimestamp     DateTime[]
+  endTimestamp       DateTime[]
   reservationOwner   User     @relation(fields: [reservationOwnerId], references: [id])
   reservationOwnerId String
 }
