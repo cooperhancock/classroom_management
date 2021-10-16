@@ -1,8 +1,9 @@
 import { AppBar, Button, Toolbar, Typography, Container } from "@mui/material";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { getBuildingsFromApi } from "./api";
 import React, { FC } from "react";
 import { Rooms } from "./pages/Rooms";
+import { FilterByBuilding } from "./components/FilterByBullding";
 
 const App: FC = () => {
     return (
@@ -32,6 +33,16 @@ const App: FC = () => {
                 <Switch>
                     <Route exact path="/">
                         home page
+                        <button
+                            onClick={async () => {
+                                const result = await getBuildingsFromApi();
+                                console.log("result");
+                                console.log(result);
+                            }}
+                        >
+                            click me
+                        </button>
+                        <FilterByBuilding></FilterByBuilding>
                     </Route>
                     <Route path="/rooms">
                         <Rooms />
