@@ -1,4 +1,5 @@
 import Koa from "koa";
+import cors from "@koa/cors";
 import Router from "@koa/router";
 import json from "koa-json";
 import { PrismaClient } from "@prisma/client";
@@ -6,7 +7,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const app = new Koa();
 
-app.use(json({ pretty: false }));
+app.use(json({ pretty: false })).use(
+    cors({
+        origin: "*",
+    })
+);
 
 // routers
 
