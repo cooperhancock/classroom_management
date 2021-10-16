@@ -35,6 +35,10 @@ router.get("/buildings", async (ctx, next) => {
     ctx.body = await prisma.building.findMany();
 });
 
+router.get("/rooms", async (ctx, next) => {
+    ctx.body = await prisma.room.findMany();
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 const main = () => {
