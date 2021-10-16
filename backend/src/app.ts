@@ -44,6 +44,15 @@ router.get("/rooms", async (ctx, next) => {
     ctx.body = await prisma.room.findMany();
 });
 
+router.get("/buildings/:id/rooms", async (ctx, next) => {
+    ctx.body = (
+        await prisma.building.findUnique({
+            where: { id: ctx.params.id },
+            include: { rooms: true },
+        })
+    )?.rooms;
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 const main = () => {

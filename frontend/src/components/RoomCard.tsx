@@ -2,11 +2,16 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { FC } from "react";
 
 export interface RoomCardProps {
-    name: string;
+    number: string;
+    buildingName: string;
     imageUrl?: string;
 }
 
-export const RoomCard: FC<RoomCardProps> = ({ name, imageUrl }) => {
+export const RoomCard: FC<RoomCardProps> = ({
+    buildingName,
+    number,
+    imageUrl,
+}) => {
     return (
         <Card>
             <CardMedia
@@ -17,7 +22,9 @@ export const RoomCard: FC<RoomCardProps> = ({ name, imageUrl }) => {
                 image={imageUrl ?? "https://placekitten.com/140/140"}
             ></CardMedia>
             <CardContent>
-                <Typography align="center">{name}</Typography>
+                <Typography align="center">
+                    {buildingName} {number}
+                </Typography>
             </CardContent>
         </Card>
     );
