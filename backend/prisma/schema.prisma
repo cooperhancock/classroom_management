@@ -12,18 +12,22 @@ generator client {
 
 model Room {
   id           String        @id @default(uuid())
+  buildingId   String
+  number       String        
   capacity     Int
   type         String
   imageUrl     String?
   roomType     RoomType      @relation(fields: [type], references: [roomTypeName])
   reservations Reservation[]
-}
+  building     Building      @relation(fields: [buildingId], references: [id])
+} 
 
 model Building {
   id               String           @id @default(uuid())
   name             String
   location         String
   buildingLocation BuildingLocation @relation(fields: [location], references: [locationName])
+  rooms            Room[]
 }
 
 model BuildingLocation {

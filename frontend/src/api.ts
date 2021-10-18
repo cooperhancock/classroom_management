@@ -7,8 +7,27 @@ export interface Building {
     location: string;
 }
 
+export interface Room {
+    id: string;
+    buildingId: string;
+    number: string;
+    type: string;
+    capacity: number;
+}
+
 export const getBuildingsFromApi: () => Promise<Building[]> = async () => {
     const response = await fetch(`${config.apiUrl}/buildings`);
+    const json = await response.json();
+    return json;
+};
+
+export const getRoomsFromApi: (buildingId?: string) => Promise<Room[]> = async (
+    buildingId?: string
+) => {
+    const response =
+        buildingId == undefined
+            ? await fetch(`${config.apiUrl}/rooms`)
+            : await fetch(`${config.apiUrl}/buildings/${buildingId}/rooms`);
     const json = await response.json();
     return json;
 };
@@ -37,3 +56,23 @@ const usePromise = <T>(makePromise: () => Promise<T>): Pending<T> => {
 
 export const useBuildings = (): Pending<Building[]> =>
     usePromise(getBuildingsFromApi);
+
+export const useRooms = (buildingId?: string): Pending<Room[]> =>
+    usePromise(() => getRoomsFromApi(buildingId));
+
+export const joinPending = <T, U>(
+    x: Pending<T>,
+    y: Pending<U>
+): Pending<[T, U]> => {
+    switch (x.type) {
+        case "LOADING":
+            return { type: "LOADING" };
+        case "READY":
+            switch (y.type) {
+                case "LOADING":
+                    return { type: "LOADING" };
+                case "READY":
+                    return { type: "READY", value: [x.value, y.value] };
+            }
+    }
+};
