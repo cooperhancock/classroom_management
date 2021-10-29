@@ -4,15 +4,30 @@ import React, {
     Grid,
     Select,
     Typography,
+    useMediaQuery,
 } from "@mui/material";
 import { FC } from "react";
 import { useRooms, useBuildings, joinPending, Building } from "../api";
 import { RoomCard, RoomCardProps } from "../components/RoomCard";
 import { FilterByBuilding } from "../components/FilterByBullding";
+import { useLocation } from "react-router";
 
-export const Rooms: FC<{ building?: Building }> = ({ building }) => {
+interface RoomFilterParams {
+    buildingId?: string;
+}
+
+const useFilterQueryParams = (): RoomFilterParams => {
+    const queryParams = new URLSearchParams(useLocation().search);
+    return {
+        buildingId: queryParams.get("buildingId") ?? undefined,
+    };
+};
+
+export const Rooms: FC = () => {
+    const { buildingId: selectedBuildingId } = useFilterQueryParams();
+    console.log({ selectedBuildingId });
     const buildings = useBuildings();
-    const rooms = useRooms(building?.id);
+    const rooms = useRooms(selectedBuildingId);
     const joined = joinPending(rooms, buildings);
     switch (joined.type) {
         case "LOADING":
