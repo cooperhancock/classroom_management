@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { config } from "./config";
 
 export interface Building {
@@ -50,7 +50,7 @@ const usePromise = <T>(makePromise: () => Promise<T>): Pending<T> => {
         makePromise().then((value) =>
             setLoadingState({ type: "READY", value: value })
         );
-    }, []);
+    }, [makePromise]);
     return loadingState;
 };
 
@@ -58,7 +58,7 @@ export const useBuildings = (): Pending<Building[]> =>
     usePromise(getBuildingsFromApi);
 
 export const useRooms = (buildingId?: string): Pending<Room[]> =>
-    usePromise(() => getRoomsFromApi(buildingId));
+    usePromise(useCallback(() => getRoomsFromApi(buildingId), [buildingId]));
 
 export const joinPending = <T, U>(
     x: Pending<T>,
