@@ -42,7 +42,6 @@ const App: FC = () => {
                         >
                             click me
                         </button>
-                        <FilterByBuilding></FilterByBuilding>
                     </Route>
                     <Route path="/rooms">
                         <Rooms />

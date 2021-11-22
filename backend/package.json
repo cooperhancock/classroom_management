@@ -23,6 +23,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.4.1",
     "prisma": "^3.1.1",
+    "ts-node": "^10.4.0",
     "tsc-watch": "^4.5.0"
   },
   "scripts": {
@@ -32,6 +33,9 @@
     "start": "tsc-watch --onSuccess \"node ./build/app.js\"",
     "start:docker": "node ./build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
   },
   "author": "",
   "license": "ISC"
