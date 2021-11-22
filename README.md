@@ -1,5 +1,7 @@
 # classroom_management
 
+This website is an attempt to create a classroom management and reservation system for a university. 
+
 ## Local Setup
 
 This project uses Docker and NodeJS v14. You will need to install both of these.
